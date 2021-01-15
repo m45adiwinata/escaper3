@@ -29,7 +29,7 @@ class CartController extends Controller
             else {
                 $data['textberjalan'] = $textberjalan->text;
             }
-            return view('cart.index', $data);
+            return view('cart.index2', $data);
         }
 
         return redirect('/');
