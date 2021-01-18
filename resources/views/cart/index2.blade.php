@@ -11,14 +11,13 @@
             @if(count($carts) > 0)
             <div id="contained">
                 <div class="cart-top">
-                        <a href="">Shopping Carts</a>
-                        <p>></p>
-                        <p>Checkout Detail</p>
-                        <p>></p>
-                        <p>Order Complete</p>
-                    </div>
+                    <a href="/cart">Shopping Carts</a>
+                    <p>></p>
+                    <p>Checkout Detail</p>
+                    <p>></p>
+                    <p>Order Complete</p>
+                </div>
                 <div class="row">
-                    
                     <div class="col-md-8">
                         <div class="cart-detail">
                             <table>

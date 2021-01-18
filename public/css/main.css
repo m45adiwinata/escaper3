@@ -490,7 +490,6 @@ footer{
    display: flex;
    justify-content: center;
 }
-
 .cart-top a,
 .cart-top p{
    text-align: center;
@@ -633,6 +632,139 @@ footer{
    color: white;
 }
 
+/*checkout*/
+.checkout-wrapper{
+   position: relative;
+   top: 20vh;
+   min-height: 80vh;
+   margin-bottom: 20vh;
+}
+.checkout-option p{
+   margin-bottom: 10px;
+}
+.checkout-option a{
+   text-decoration: none;
+   color: black;
+   font-weight: 600;
+}
+.checkout-option a:hover{
+   color: steelblue;
+}
+
+.login,
+.coupon{
+   display: none;
+   border: solid 1.5px black;
+   background-color: rgba(128, 128, 128, 0.02);
+   margin: 10px 0px;
+   padding: 20px 20px;
+   font-size: 0.8rem;
+   transition: all 0.3s ease;
+}
+.login p,
+.coupon p{
+   margin-bottom:10px;
+}
+.login input,
+.coupon input{
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 0px;
+   font-size: 0.7rem;
+   margin-bottom: 20px;
+   padding: 10px 5px;
+}
+.login .form-control{
+   margin-bottom:10px;
+}
+.login .form-check{
+   padding: 0px;
+   margin-bottom: 10px;
+   display: flex;
+   align-items: center;
+}
+.login .form-check input,
+.login .form-check label{
+   margin: 0px 5px 0px 0px;
+}
+.login .btn,
+.coupon .btn{
+   background: black;
+   border-radius: 0px;
+   font-size: 0.8rem;
+   font-weight: 600;
+   color: white;
+}
+.login .btn:hover{
+   background: rgba(0, 0, 0, 0.8);
+}
+.coupon .btn{
+   width: 100%;
+   padding: 5px;
+}
+
+.checkout-info{
+   margin-bottom: 20px;
+   padding: 20px 0px;
+   border-top: solid 2px gray;
+}
+.checkout-info .form-group{
+   margin: 15px 0px 0px 0px;
+}
+.checkout-info label{
+   font-size: 0.8rem;
+   letter-spacing: 0.3px;
+}
+.checkout-info label span{
+   color: red;
+}
+.checkout-info input,
+.checkout-info select{
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 0px;
+   font-size: 0.8rem;
+   padding: 18px 5px;
+}
+.checkout-info textarea{
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 0px;
+   font-size: 0.8rem;
+   padding: 10px 5px;
+}
+.checkout-order{
+   padding: 20px 20px;
+   border: solid 3px black;
+   margin-bottom: 10px;
+}
+.checkout-order table{
+   font-size: 0.8rem;
+   margin-top: 15px;
+}
+.checkout-order table th{
+   padding: 0px 0px 10px 0px;
+   border-top: none;
+   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+.checkout-order table td{
+   padding: 10px 0px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.checkout-order table td:last-child{
+   border-bottom: none;
+}
+.total{
+   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+.place-order .btn{
+   background: black;
+   padding: 15px 25px;
+   border-radius: 0px;
+   font-size: 0.8rem;
+   font-weight: 600;
+   color: white;
+}
+.place-order .btn:hover{
+   background: rgba(0, 0, 0, 0.8);
+}
 /*about*/
 .about-wrapper{
    background-image: url(img/back2.jpg);
@@ -943,4 +1075,17 @@ footer{
       display: none;
    }
 
+   /*checkout*/
+   .checkout-option p{
+      font-size: 0.8rem;
+   }
+
+   .place-order .btn{
+      width: 100%;
+   }
+
+   /*footer*/
+   .copyright p{
+      font-size: 0.45 rem;
+   }
 }

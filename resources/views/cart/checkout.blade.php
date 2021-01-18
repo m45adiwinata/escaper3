@@ -1,255 +1,230 @@
-@extends('layouts.main')
+@extends('layouts.phone')
 @section('title')
  | Checkout
 @endsection
 @section('content')
-@include('components.header2')
-<div class="product">
-    <div class="container">
-        <table class="tbl">
-            <tr>
-                <td><a href="/cart">SHOPPING CART</a></td>
-                <td>></td>
-                <td><a href="/cart/checkout">CHECKOUT DETAILS</td>
-                <td>></td>
-                <td>ORDER COMPLETE</td>
-            </tr>
-        </table>
-        <div>
-            Returning customer? <a href="#" class="showlogin hitam-ke-orange" id="showlogin">Click here to login</a>
-            <div id="login" style="display:none;">
-                If you have shopped with us before, please enter your detail below. If you are a new customer, please proceed to the Billing section.
+@include('components.headerphone2')
+<div class="container-lg">
+    <div class="checkout-wrapper">
+        <div class="cart-top">
+            <a href="/cart">Shopping Carts</a>
+            <p>></p>
+            <a href="/cart/checkout">Checkout Detail</a>
+            <p>></p>
+            <p>Order Complete</p>
+        </div>
+        <div class="checkout-option">
+            <p>Returning customer? <a href="#" id="showlogin"> Click here to login</a></p>
+            <div class="login">
+                <p>If you have shopped with us before, please enter your detail below. If you are a new customer, please proceed to the Billing section.</p>
                 <form action="/cart/checkout/login" method="POST">
                     @csrf
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="col-md-6">
                             <label for="username"><b>Username or email *</b></label>
                             <input type="email" class="form-control" name="username" id="username" placeholder="" autocomplete="off">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="col-md-6">
                             <label for="password"><b>Password *</b></label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="" autocomplete="off">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="checkRemember" name="checkRemember">
-                            <label class="form-check-label" for="checkRemember">
-                                <b>Remember me</b>
-                            </label>
-                        </div>
+                    <div class="form-check">
+                        <input class="" type="checkbox" value="" id="checkRemember" name="checkRemember">
+                        <label class="" for="checkRemember">Remember me</label>
                     </div>
-                    <div class="form-row">
-                        <button class="btn">LOGIN</button>
-                    </div>
+                    <button class="btn">LOGIN</button>
                 </form>
             </div>
-        </div>
-        <br>
-        <div>
-            Have a coupon? <a href="#" class="showlogin hitam-ke-orange" id="showcoupon">Click here to enter your code</a>
-            <div id="coupon" style="display:none;">
-                <form action="" method="POST">
-                    @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="coupon">If you have a coupon code, please apply it below.</label>
-                            <input type="text" id="coupon" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="coupon"><span style="color:white;">.</span></label>
-                            <br>
-                            <button class="btn" type="submit">APPLY COUPON</button>
-                        </div>
+            <p>Have a coupon? <a href="#" id="showcoupon">Click here to enter your code</a></p>
+            <div class="coupon">
+                <p>If you have a coupon code, please apply it below.</p>
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" id="coupon" placeholder="Coupon Code">
                     </div>
-                </form>
+                    <div class="col-md-4">
+                        <button class="btn">APPLY COUPON</button>
+                    </div>                   
+                </div>              
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-12"><h4>BILLING & SHIPPING</h4></div>
-        </div>
-        <form action="/cart/place-order" method="POST">
-            @csrf
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputFirstName"><b>First Name</b></label>
-                                <input type="text" class="form-control" name="firstName" id="inputFirstName" placeholder="">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputLastName"><b>Last Name (optional)</b></label>
-                                <input type="text" class="form-control" name="lastName" id="inputLastName" placeholder="">
-                            </div>
+        <div class="row" >
+            <div class="col-md-7">
+                <div class="checkout-info">
+                    <p><b>BILLING & SHIPPING</b></p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputFirstName"><b>First Name <span>*</span></b></label>
+                            <input type="text" class="form-control" name="firstName" id="inputFirstName" placeholder="">
                         </div>
-                        <div class="form-group">
-                            <label for="inputCompany"><b>Company/Organization (optional)</b></label>
-                            <input type="text" class="form-control" name="company" id="inputCompany" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="selectCountry"><b>Country *</b></label>
-                            <select class="form-control" id="selectCountry" name="country"><option value="" selected="selected" disabled></option></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="selectCountry"><b>State/Province *</b></label>
-                            <select class="form-control" id="selectState" name="state"><option value="" selected="selected" disabled></option></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="selectCountry"><b>City *</b></label>
-                            <select class="form-control" id="selectCity" name="city"><option value="" selected="selected" disabled></option></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress"><b>Address *</b></label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="" name="address">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputZipCode"><b>Zip Code (optional)</b></label>
-                            <input type="text" class="form-control" id="inputZipCode" placeholder="" name="zipcode">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPhone"><b>Phone *</b></label>
-                            <input type="text" class="form-control" id="inputPhone" placeholder="" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail"><b>Email address *</b></label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="" name="email">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="subscribe" id="checkSubscribe" name="checkSubscribe" checked>
-                                <label class="form-check-label" for="checkSubscribe">
-                                <b>Subscribe to our newsletter</b>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="createAcc" id="checkCreateAcc" name="checkCreateAcc">
-                                <label class="form-check-label" for="checkCreateAcc">
-                                Create an account?
-                            </label>
-                        </div>
-                        <div class="form-group" id="create-password" style="display:none;">
-                            <label for="inputNewaPass"><b>Create your password</b></label>
-                            <input type="password" class="form-control" name="new_password" id="inputNewaPass">
-                        </div>
-                        <br>
-                        <h4>ADDITIONAL INFORMATION</h4>
-                        <div class="form-group">
-                            <label for="inputNotes"><b>Order notes (optional)</b></label>
-                            <textarea class="form-control" id="inputNotes" rows="4" name="notes"></textarea>
-                        </div>
-                        <input type="hidden" id="h-grandtotal" value="0">
-                        <input type="hidden" name="discount" id="h-discount" value="0">
-                        <input type="hidden" name="shipping" id="h-shipping" value="0">
-                    </div>
-                    <div class="col-sm-6">
-                        <div style="font-size:14px; border: 3px solid black; padding:15px;">
-                            <h4>YOUR ORDER</h4>
-                            <table class="table">
-                                <tr>
-                                    <th class="text-left">PRODUCT</th>
-                                    <th class="text-right">SUBTOTAL</th>
-                                </tr>
-                                @php $subtotal = 0; @endphp
-                                @foreach($carts as $cart)
-                                <tr>
-                                    <td class="text-left">{{$cart->product()->first()->name}} <b>x {{$cart->amount}}</b></td>
-                                    <td class="text-right">
-                                        <b>
-                                            @php $subtotal+= $cart->total; @endphp
-                                            {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($cart->total, 0, ',', '.') : '$ '.number_format($cart->total, 2, ',', '.')}}
-                                        </b>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                <tr>
-                                    <td class="text-left"><b>Subtotal</b></td>
-                                    <td class="text-right">
-                                        <b>
-                                            {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($subtotal, 0, ',', '.') : '$ '.number_format($subtotal, 2, ',', '.')}}
-                                        </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left"><b>Discount</b></td>
-                                    <td class="text-right">
-                                        <b id="discount-val">
-                                            {{$_COOKIE['currency'] == 'IDR' ? 'Rp 0' : '$ 0'}}
-                                        </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left"><b>Shipping{{$_COOKIE['currency'] == 'IDR' ? '' : ' (flate rate)'}}</b></td>
-                                    <td class="text-right">
-                                        <b>
-                                            @php 
-                                            if ($_COOKIE['currency'] == 'USD' && $subtotal >= 150) {
-                                                $shipping = 0; 
-                                                echo('FREE SHIPPING');
-                                            }
-                                            else if ($_COOKIE['currency'] == 'USD') {
-                                                $shipping = 15;
-                                                echo('$ '.number_format($shipping, 2, ',', '.'));
-                                            }
-                                            else {
-                                                $shipping = 0;
-                                                echo('FREE SHIPPING');
-                                            }
-                                            @endphp
-                                        </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left"><b>Total</b></td>
-                                    <td class="text-right">
-                                        <b id="grandtotal-val">
-                                            @php $grandtotal = $subtotal + $shipping; @endphp
-                                            {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($grandtotal, 0, ',', '.') : '$ '.number_format($grandtotal, 2, ',', '.')}}
-                                        </b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="radTrfBank" id="radTrfBank" value="option1" checked>
-                                            <label class="form-check-label" for="radTrfBank">
-                                                <b>Transfer BCA 6115373947 a/n I Made Bayu Dharma Wibawa</b>
-                                            </label>
-                                            <br>
-                                            Make your payment directly into our bank account. 
-                                            Please use your Order ID as the payment reference to info@escaper-store.com. 
-                                            Your order will not be shipped until the funds have cleared in our account.
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="radPayPal" id="radPayPal" value="option2">
-                                            <label class="form-check-label" for="radPayPal">
-                                                <b>PayPal</b>
-                                                <img src="{{asset('images/paypal icon.png')}}" alt="PayPal Icon" style="width:84px;height:37px;">
-                                            </label>
-                                            <div id="smart-button-container" style="display:none;">
-                                                <div style="text-align: center;">
-                                                    <div id="paypal-button-container"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><button type="submit" class="btn btn-primary">PLACE ORDER</button></td>
-                                </tr>
-                            </table>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastName"><b>Last Name (optional)</b></label>
+                            <input type="text" class="form-control" name="lastName" id="inputLastName" placeholder="">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputCompany"><b>Company/Organization (optional)</b></label>
+                        <input type="text" class="form-control" name="company" id="inputCompany" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCountry"><b>Country <span>*</span></b></label>
+                        <select class="form-control" id="selectCountry" name="country"><option value="" selected="selected" disabled></option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCountry"><b>State/Province <span>*</span></b></label>
+                        <select class="form-control" id="selectState" name="state"><option value="" selected="selected" disabled></option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCountry"><b>City <span>*</span></b></label>
+                        <select class="form-control" id="selectCity" name="city"><option value="" selected="selected" disabled></option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress"><b>Address <span>*</span></b></label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZipCode"><b>Zip Code (optional)</b></label>
+                        <input type="text" class="form-control" id="inputZipCode" placeholder="" name="zipcode">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone"><b>Phone <span>*</span></b></label>
+                        <input type="text" class="form-control" id="inputPhone" placeholder="" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail"><b>Email address <span>*</span></b></label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="" name="email">
+                    </div>
+                    <div class="form-group form-check">
+                        <input class="form-check-input" type="checkbox" value="subscribe" id="checkSubscribe" name="checkSubscribe" checked>
+                        <label class="form-check-label" for="checkSubscribe">
+                            <b>Subscribe to our newsletter</b>
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input class="form-check-input" type="checkbox" value="createAcc" id="checkCreateAcc" name="checkCreateAcc">
+                        <label class="form-check-label" for="checkCreateAcc">
+                            Create an account?
+                        </label>
+                    </div>
+                    <div class="form-group" id="create-password" style="display:none;">
+                        <label for="inputNewaPass"><b>Create your password <span>*</span></b></label>
+                        <input type="password" class="form-control" name="new_password" id="inputNewaPass">
+                    </div>
+                    <p class="mt-3"><b>ADDITIONAL INFORMATION</b></p>
+                    <div class="form-group">
+                        <label for="inputNotes"><b>Order notes (optional)</b></label>
+                        <textarea class="form-control" id="inputNotes" rows="4" name="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                    </div>
+                    <input type="hidden" id="h-grandtotal" value="0">
+                    <input type="hidden" name="discount" id="h-discount" value="0">
+                    <input type="hidden" name="shipping" id="h-shipping" value="0">
                 </div>
             </div>
-        </form>
+            <div class="col-md-5">
+                <div class="checkout-order">
+                    <p><b>YOUR ORDER</b></p>
+                    <table class="table">
+                        <tr>
+                            <th class="text-left">PRODUCT</th>
+                            <th class="text-right">SUBTOTAL</th>
+                        </tr>
+                        @php $subtotal = 0; @endphp
+                        @foreach($carts as $cart)
+                        <tr>
+                            <td class="text-left">{{$cart->product()->first()->name}} <b>x {{$cart->amount}}</b></td>
+                            <td class="text-right">
+                                <b>
+                                    @php $subtotal+= $cart->total; @endphp
+                                            {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($cart->total, 0, ',', '.') : '$ '.number_format($cart->total, 2, ',', '.')}}
+                                </b>
+                            </td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td class="text-left"><b>Subtotal</b></td>
+                            <td class="text-right">
+                                <b>
+                                    {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($subtotal, 0, ',', '.') : '$ '.number_format($subtotal, 2, ',', '.')}}
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><b>Discount</b></td>
+                            <td class="text-right">
+                                <b id="discount-val">
+                                    {{$_COOKIE['currency'] == 'IDR' ? 'Rp 0' : '$ 0'}}
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><b>Shipping{{$_COOKIE['currency'] == 'IDR' ? '' : ' (flate rate)'}}</b></td>
+                            <td class="text-right">
+                                <b>
+                                    @php 
+                                    if ($_COOKIE['currency'] == 'USD' && $subtotal >= 150) {
+                                        $shipping = 0; 
+                                        echo('FREE SHIPPING');
+                                    }
+                                    else if ($_COOKIE['currency'] == 'USD') {
+                                        $shipping = 15;
+                                        echo('$ '.number_format($shipping, 2, ',', '.'));
+                                    }
+                                    else {
+                                        $shipping = 0;
+                                        echo('FREE SHIPPING');
+                                    }
+                                    @endphp
+                                </b>
+                            </td>
+                        </tr>
+                        <tr class="total">
+                            <td class="text-left"><b>Total</b></td>
+                            <td class="text-right">
+                                <b id="grandtotal-val">
+                                    @php $grandtotal = $subtotal + $shipping; @endphp
+                                    {{($_COOKIE['currency'] == 'IDR') ? 'Rp '.number_format($grandtotal, 0, ',', '.') : '$ '.number_format($grandtotal, 2, ',', '.')}}
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radTrfBank" id="radTrfBank" value="option1" checked>
+                                    <label class="form-check-label" for="radTrfBank">
+                                            <b>Transfer BCA 6115373947 a/n I Made Bayu Dharma Wibawa</b>
+                                    </label>
+                                    <br>
+                                    Make your payment directly into our bank account. Please use your Order ID as the payment reference to info@escaper-store.com.Your order will not be shipped until the funds have cleared in our account.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radPayPal" id="radPayPal" value="option2">
+                                    <label class="form-check-label" for="radPayPal">
+                                        <b>PayPal</b>
+                                        <img src="{{asset('images/paypal icon.png')}}" alt="PayPal Icon" style="width:84px;height:37px;">
+                                        </label>
+                                    <div id="smart-button-container" style="display:none;">
+                                        <div style="text-align: center;">
+                                            <div id="paypal-button-container"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="place-order">
+                            <td colspan="2"><button type="submit" class="btn ">PLACE ORDER</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-@include('components.footer')
+@include('components.footerphone')
 @endsection
 @section('script')
 <script src="https://www.paypal.com/sdk/js?client-id=AS4RC9ACUJEUfAZHnPyiq4chJcOGzclOslQX9SBaFeHi9stA5zBOnshRWiJiZHPt3VvZ8T9Q7SNWLBjg" data-sdk-integration-source="button-factory"></script>
