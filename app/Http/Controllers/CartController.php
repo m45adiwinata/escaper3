@@ -22,13 +22,19 @@ class CartController extends Controller
                 $data['carts'][$i]->avl = ProductAvailability::where('product_id', $data['carts'][$i]->product_id)
                                             ->where('size_init', $data['carts'][$i]->sizeInitial()->first()->initial)->first();
             }
-            $textberjalan = TextBerjalan::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->first();
+            $textberjalan = TextBerjalan::where('currency', $_COOKIE['currency'])->where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->get();
             if(!$textberjalan) {
                 $data['textberjalan'] = 'text here';
             }
             else {
-                $data['textberjalan'] = $textberjalan->text;
+                $text = '';
+                foreach ($textberjalan as $key => $tb) {
+                    $text .= $tb->text;
+                    $text .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+                $data['textberjalan'] = $text;
             }
+            // return view('cart.index', $data);
             return view('cart.index2', $data);
         }
 
@@ -85,7 +91,7 @@ class CartController extends Controller
             $tc->grandtotal = $grandtotal;
             $tc->save();
 
-            return view('cart.checkout', $data);
+            return view('cart.checkout3', $data);
         }
 
         return redirect('/');
@@ -102,7 +108,14 @@ class CartController extends Controller
         $data->company = $request->company;
         $data->country = $request->country;
         $data->state = $request->state;
-        $data->city = $request->city;
+        if($request->country == 'Indonesia') {
+            $data->city = $request->city;
+            $data->kecamatan = $request->kecamatan;
+            $data->kelurahan = $request->kelurahan;
+        }
+        else {
+            $data->city = $request->citytext;
+        }
         $data->address = $request->address;
         $data->zipcode = $request->zipcode;
         $data->phone = $request->phone;
@@ -126,7 +139,11 @@ class CartController extends Controller
                 $user->company = $data->company;
                 $user->country = $data->country;
                 $user->state = $data->state;
-                $user->city = $data->city;
+                $data->city = $data->city;
+                if($request->country == 'Indonesia') {
+                    $data->kecamatan = $data->kecamatan;
+                    $data->kelurahan = $data->kelurahan;
+                }
                 $user->address = $data->address;
                 $user->zipcode = $data->zipcode;
                 $user->phone = $data->phone;
@@ -172,32 +189,32 @@ class CartController extends Controller
         $data->sub_total = $sub_total;
         $data->grand_total = $grand_total;
         $data->save();
-        // Cart::where('guest_code', $data->guest_code)->update(['checkout' => 1]);
-        // $temp = array(
-        //     'email' => $data->email,
-        //     'first_name' => $data->first_name,
-        //     'last_name' => $data->last_name,
-        //     'address' => $data->address,
-        //     'zipcode' => $data->zipcode,
-        //     'city' => $data->city,
-        //     'state' => $data->state,
-        //     'country' => $data->country,
-        //     'phone' => $data->phone,
-        //     'guest_code' => $data->guest_code,
-        //     'currency' => $data->currency,
-        //     'sub_total' => $sub_total,
-        //     'grand_total' => $grand_total,
-        //     'payment' => $temp_payment,
-        //     'discount' => $data->discount,
-        //     'shipping' => $data->shipping,
-        //     'carts' => $carts,
-        //     'logo' => env('APP_URL').'/images/LOGO-PNG%20BLACKBG.png'
-        // );
-        // Mail::send('emailku', $temp, function($message) use ($temp) {
-        //     $message->to($temp['email']);
-        //     $message->from('info@escaper-store.com');
-        //     $message->subject('Purchase '.$temp['guest_code']);
-        // });
+        Cart::where('guest_code', $data->guest_code)->update(['checkout' => 1]);
+        $temp = array(
+            'email' => $data->email,
+            'first_name' => $data->first_name,
+            'last_name' => $data->last_name,
+            'address' => $data->address,
+            'zipcode' => $data->zipcode,
+            'city' => $data->city,
+            'state' => $data->state,
+            'country' => $data->country,
+            'phone' => $data->phone,
+            'guest_code' => $data->guest_code,
+            'currency' => $data->currency,
+            'sub_total' => $sub_total,
+            'grand_total' => $grand_total,
+            'payment' => $temp_payment,
+            'discount' => $data->discount,
+            'shipping' => $data->shipping,
+            'carts' => $carts,
+            'logo' => env('APP_URL').'/images/LOGO-PNG.png'
+        );
+        Mail::send('emailku', $temp, function($message) use ($temp) {
+            $message->to($temp['email']);
+            $message->from('info@escaper-store.com');
+            $message->subject('Purchase '.$temp['guest_code']);
+        });
         $carts = Cart::where('guest_code', $_COOKIE['guest_code'])->where('checkout', 0)->get();
         foreach ($carts as $key => $cart) {
             $cart->checkout = 1;
@@ -207,6 +224,21 @@ class CartController extends Controller
         if ($data->pembayaran == 1) {
             return redirect('/cart/upload-payment/'.$data->id);
         }
+        $temp = array(
+            'email' => $data->email,
+            'first_name' => $data->first_name,
+            'last_name' => $data->last_name,
+            'guest_code' => $data->guest_code,
+            'currency' => $data->currency,
+            'grand_total' => $data->grand_total,
+            'image' => env('APP_URL').'/images/paypal%20icon.png',
+            'id' => $request->id
+        );
+        Mail::send('emailtransfer', $temp, function($message) use ($temp) {
+            $message->to('info.escaper@gmail.com');
+            $message->from('info@escaper-store.com');
+            $message->subject('Purchase '.$temp['guest_code']);
+        });
         return redirect('/home');
         
     }
@@ -408,6 +440,7 @@ class CartController extends Controller
         if (md5($request->password) == $data['user']->password) {
             return view('cart.checkout2', $data);
         }
+        
         return redirect('/cart/checkout');
     }
 }

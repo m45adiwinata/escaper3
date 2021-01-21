@@ -11,13 +11,14 @@
             @if(count($carts) > 0)
             <div id="contained">
                 <div class="cart-top">
-                    <a href="/cart">Shopping Carts</a>
-                    <p>></p>
-                    <p>Checkout Detail</p>
-                    <p>></p>
-                    <p>Order Complete</p>
-                </div>
+                        <a href="">Shopping Carts</a>
+                        <p>></p>
+                        <p>Checkout Detail</p>
+                        <p>></p>
+                        <p>Order Complete</p>
+                    </div>
                 <div class="row">
+                    
                     <div class="col-md-8">
                         <div class="cart-detail">
                             <table>
@@ -103,7 +104,7 @@
             </div>
             <div class="row" id="emptycart" style="display:none;">
                 <div class="cart-empty ">
-                    <img src="/images/phone/sad-cart.png" alt="sad-cart">
+                    <!-- <img src="/images/phone/sad-cart.png" alt="sad-cart"> -->
                     <p>Your cart is currently empty.</p>
                     <a class="btn btn-to-shop" href="/shop">Back to Shop</a>
                 </div>
@@ -111,7 +112,7 @@
             @else
             <div class="row">
                 <div class="cart-empty">
-                    <img src="/images/phone/sad-cart.png" alt="sad-cart">
+                    <!-- <img src="/images/phone/sad-cart.png" alt="sad-cart"> -->
                     <p>Your cart is currently empty.</p>
                     <a class="btn btn-to-shop" href="/shop">Back to Shop</a>
                 </div>
@@ -145,7 +146,7 @@
                     if (data.count > 0) {
                         console.log('none');
                         // $('#cart').css('color', 'white');
-                        $('#cart-black').html(data.count);
+                        $('#cart').html(data.count);
                         // $('#cart-items').empty();
                         // for (var i=0; i<data.count; i++) {
                         //     $('#cart-items').append('<li>'+data.items[i].product_name+' '+data.items[i].amount+'</li>');
@@ -155,10 +156,10 @@
                     }
                     else {
                         // $('#cart').css('color', 'black');
-                        $('#cart-black').html('0');
+                        $('#cart').html('0');
                         // $('#cart-items').empty();
-                        // $('#contained').css('display', 'none');
-                        // $('#emptycart').css('display', 'block');
+                        $('#contained').css('display', 'none');
+                        $('#emptycart').css('display', 'block');
                     }
                 });
             });

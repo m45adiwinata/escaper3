@@ -25,10 +25,12 @@
             }
             .header-logo h1{
                 font-size: 100px;
+                color: black;
             }
             .currency-txt{
                 font-size:50px;
                 font-weight:600;
+                color: black;
             }
             .currencyoption{
                 width:25vw;
