@@ -42,7 +42,7 @@ nav a{
    border-bottom: none;
 }
 nav .wrapper{
-   height: 18vh;
+   height: 15vh;
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -97,7 +97,7 @@ nav .wrapper{
 .nav-links .drop-menu{
    background: rgba(0, 0, 0, 0.5);
    position: absolute;
-   top : 19vh;
+   top : 21vh;
    visibility: hidden;
 }
 .nav-links .drop-menu a{
@@ -108,7 +108,7 @@ nav .wrapper{
    line-height: 50px;
 }
 .nav-links li:hover .drop-menu{
-   top: 18vh;
+   top: 20vh;
    opacity: 1;
    visibility: visible;
    transition: all .3s ease;
@@ -244,11 +244,13 @@ footer{
    margin-bottom: 25vh;
 }
 .shop-top{
-   padding: 20px 0px;
+   display: flex;
+   justify-content: flex-start;
 }
 .shop-top p{
    font-size: 1.1rem;
    font-weight: 800;
+   padding: 20px 0px;
    text-transform: uppercase;
 }
 .shop-wrapper .item{
@@ -508,6 +510,12 @@ footer{
 .cart-top a{
    color: black;
 }
+.cart-removed a{
+   text-decoration: none;
+}
+.cart-removed i{
+   color: rgb(96, 96, 255);
+}
 .cart-detail{
    border-right: 1px solid rgb(220, 220, 220);
    padding-right: 30px;
@@ -621,7 +629,7 @@ footer{
 .cart-empty .btn-to-shop{
    margin: 20px;
    padding: 10px;
-   width: 20%;
+   width: 25%;
    border-radius: 0px;
    color: black;
    font-size: 0.9rem;
@@ -839,6 +847,78 @@ footer{
    font-weight: 600;
 }
 
+/*stockist*/
+.stockist-wrapper{
+   position: relative;
+   top: 25vh;
+   margin-bottom: 25vh; 
+   min-height: 70vh;
+}
+.countries.columns{
+   column-width: 15vw ;
+   width: 100%;
+   column-gap: 40px;
+   margin: auto;
+   padding-top: 50px;
+   text-align: center;
+}
+.countries.columns > .country{
+   display: block;
+   page-break-inside: avoid;
+   break-inside: avoid-column;
+   -webkit-column-break-inside: avoid;
+   padding-bottom: 30px;
+}
+.countries.columns > .country > .stockists{
+   position: relative;
+}
+.countries.columns > .country > .stockists > *{
+   display: table;
+   margin: auto;
+}
+
+.country h3{
+   font-size: 1.2rem;
+   text-transform: uppercase;
+   font-weight: 700;
+}
+.stockists a{
+   text-decoration: none;
+   font-weight: 400;
+   font-size: 0.9rem;
+   color: black;
+}
+.stockists a:hover{
+   font-weight: 500;
+}
+
+
+/*shipping*/
+.shipping-wrapper{
+   position: relative;
+   top: 25vh;
+   margin-bottom: 25vh; 
+   min-height: 82vh;
+}
+.shipping-content{
+   padding: 30px 0px;
+}
+.shipping-content h1{
+   font-size: 2rem;
+   text-transform: uppercase;
+   margin-bottom: 50px;
+   font-weight: 600;
+}
+.shipping-content h2{
+   font-size: 0.9rem;
+   font-weight: 600;
+   margin-top: 30px;
+}
+.shipping-content p{
+   font-size: 0.85rem;
+   margin: 10px 0px;
+}
+
 @media screen and (max-width: 833px) and (min-width: 768px){
    /*shop*/
    .item-info{
@@ -860,8 +940,6 @@ footer{
       width: 30px;
       height: 30px;
    }
-
-
    .wrapper .logo a{
       font-size: 1.8rem;
    }
@@ -954,7 +1032,7 @@ footer{
    }
    .footer-item{
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
    }
    .newsletter{
       flex: 0.7;
@@ -1013,6 +1091,12 @@ footer{
       margin: 10px 0px;
    }
    /*cart*/
+   .cart-top p{
+      display: none;
+   }
+   .checkout-wrapper .shopping-carts{
+      display: none;
+   }
    .cart-total{
       min-height: 0vh;
    }
@@ -1022,11 +1106,20 @@ footer{
       min-height: 50vh;
       margin-bottom: 0px;
    }
+   .cart-empty .btn-to-shop{
+      width: 40%;
+   }
+
    /*about*/
    .about-content{
       width: 50vw;
-   } 
+   }
+
    /*shop*/
+   .shop-top{
+      display: flex;
+      justify-content: center;
+   }
    .item-img{
       height: 130px;
    }
@@ -1037,8 +1130,16 @@ footer{
       padding: 3px 3px;
       font-size: 0.5rem;
    }
-}
 
+
+}
+@media screen and (max-width: 660px){
+   /*stockist*/
+   .countries.columns{
+      column-width: 200px;
+      text-align: center;
+   }
+}
 @media screen and (max-width: 450px){
    /*nav*/
    .wrapper .menu-btn{
@@ -1061,11 +1162,12 @@ footer{
       font-weight: 500;
    }   
 
-   /*cart*/
-   .cart-top a,
-   .cart-top p{
-   font-size: 0.8rem;
+   /*shop*/
+   .item-info{
+      height: 70px;
    }
+
+   /*cart*/
    .btn-continue-shop{
       width: 100%;
    }
@@ -1076,6 +1178,9 @@ footer{
    .cart-detail table th:nth-child(even){
       font-weight: 700;
       display: none;
+   }
+   .cart-empty .btn-to-shop{
+      width: 60%;
    }
 
    /*checkout*/

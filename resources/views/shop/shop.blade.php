@@ -4,6 +4,9 @@
 <section>
       <div class="container-lg">
          <div class="shop-wrapper">
+            <div class="shop-top">
+                <p>Shop</p>
+            </div>
             <div class="row">
                 @foreach($products as $product)
                 <div class="col-6 col-md-3">
@@ -31,9 +34,6 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
-            <div class="shop-top">
-                <p> </p>
             </div>
          </div>
       </div>

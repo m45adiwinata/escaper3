@@ -7,11 +7,11 @@
 <div class="container-lg">
     <div class="checkout-wrapper">
         <div class="cart-top">
-            <a href="/cart">Shopping Carts</a>
+            <a class="shopping-carts" href="/cart">Shopping Carts</a>
             <p>></p>
-            <a href="/cart/checkout">Checkout Detail</a>
+            <a class="checkout-detail" href="/cart/checkout">Checkout Detail</a>
             <p>></p>
-            <p>Order Complete</p>
+            <p class="order-complete">Order Complete</p>
         </div>
         <div class="checkout-option">
             <p>Returning customer? <a href="#" id="showlogin"> Click here to login</a></p>
