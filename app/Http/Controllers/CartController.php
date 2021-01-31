@@ -213,11 +213,11 @@ class CartController extends Controller
             'carts' => $carts,
             'logo' => env('APP_URL').'/images/LOGO-PNG.png'
         );
-        Mail::send('emailku', $temp, function($message) use ($temp) {
-            $message->to($temp['email']);
-            $message->from('info@escaper-store.com');
-            $message->subject('Purchase '.$temp['guest_code']);
-        });
+        // Mail::send('emailku', $temp, function($message) use ($temp) {
+        //     $message->to($temp['email']);
+        //     $message->from('info@escaper-store.com');
+        //     $message->subject('Purchase '.$temp['guest_code']);
+        // });
         $carts = Cart::where('guest_code', $_COOKIE['guest_code'])->where('checkout', 0)->get();
         foreach ($carts as $key => $cart) {
             $cart->checkout = 1;
@@ -237,11 +237,11 @@ class CartController extends Controller
             'image' => env('APP_URL').'/images/paypal%20icon.png',
             'id' => $request->id
         );
-        Mail::send('emailtransfer', $temp, function($message) use ($temp) {
-            $message->to('info.escaper@gmail.com');
-            $message->from('info@escaper-store.com');
-            $message->subject('Purchase '.$temp['guest_code']);
-        });
+        // Mail::send('emailtransfer', $temp, function($message) use ($temp) {
+        //     $message->to('info.escaper@gmail.com');
+        //     $message->from('info@escaper-store.com');
+        //     $message->subject('Purchase '.$temp['guest_code']);
+        // });
         return redirect('/home');
         
     }

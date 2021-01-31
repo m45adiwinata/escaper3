@@ -14,6 +14,8 @@
                                 @if(count($product->image) > 1) 
                                 <img class="img-back" src="{{$product->image[1]}}" alt="items-img">
                                 @endif
+                                <div id="outStock">Out of Stock</div>
+                                <div id="sale">Sale!</div>
                             </div>
                         </a>
                         <div class="item-info">

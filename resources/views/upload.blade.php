@@ -1,22 +1,32 @@
-@extends('layouts.main')
-
+@extends('layouts.phone')
 @section('content')
-@include('components.header2')
-<div class="about">
-	<div class="container " style="background-image: asset('images/images1.jpg');">
-        <p class="mb-4" style="color:black;">Please upload your payment/transfer proof</p>
-        <form action="/cart/post-upload" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="id" value="{{$checkout->id}}">
-            <input type="file" class="btn" id="imgInp" name="file" />
-            <br>
-            <img id="preview"></img>
-            <br>
-            <button type="submit" class="btn">Submit</button>
-        </form>
+@include('components.headerphone2')
+<div class="upload-wrapper">
+	<div class="container-lg">
+        <div class="upload-content">
+            <p> Please upload your payment/transfer proof</p>
+            <form class="form-row" action="/cart/post-upload" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{$checkout->id}}">
+                <div>
+                    <label for="username">Bank account name *</label>
+                    <input type="email" class="form-control" name="username" id="username" placeholder="" autocomplete="off">
+                </div>
+                <div>
+                    <label for="upload">Upload Evidence Of Payment *</label>
+                    <input type="file" class="form-control" name="upload" id="imgInp" name="file">
+                    <img id="preview"></img>
+                </div>
+                <div>
+                    <label for="inputNotes">Message (optional)</label>
+                    <textarea class="form-control" id="inputNotes" rows="4" name="notes" placeholder=></textarea>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
     </div>
 </div>
-@include('components.footer')
+@include('components.footerphone')
 @endsection
 
 @section('script')

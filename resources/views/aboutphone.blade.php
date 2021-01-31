@@ -1,6 +1,6 @@
 @extends('layouts.phone')
 @section('content')
-@include('components.headerphone')
+@include('components.headerphone2')
 <section>
     <div class="about-wrapper" style="background-image: url({{$about->background}});">
     <div class="container-lg">
