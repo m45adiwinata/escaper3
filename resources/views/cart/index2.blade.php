@@ -17,8 +17,8 @@
                     <p>></p>
                     <p class="order-complete">Order Complete</p>
                 </div>
-                <div class="cart-removed" id="">
-                    <div><i class="fas fa-check"></i> (nama-product) has been removed from cart. <a href="">Undo ?</a></div>
+                <div class="cart-removed" id="cart-removed" style="display:none;">
+                    <div>&#10003 <span id="namaproduk-dihapus">nama-product</span> has been removed from cart. <a href="">Undo ?</a></div>
                 </div>
                 <div class="row">
                     
@@ -128,6 +128,7 @@
 @endsection
 @section('script')
 <script>
+    var data0, data;
     function changeQty(id) {
         $.get('/cart/change-amount?cart_id=' + id +'&qty=' + $('#qty-'+id).val(), function(total) {
             $('#total-'+id).html(total);
@@ -138,34 +139,37 @@
         });
     }
     function deleteCartItem(id) {
-        $.get('/cart/delete-item?cart_id=' + id, function(response) {
-            if (response == 1) {
+        $.get('/cart/delete-item?cart_id=' + id, function(data0) {
+            data0 = data0;
+            if (data0.response == 1) {
                 $('#cart-row-'+id).remove();
-            }
-            $.get('/cart/get-grand-total', function(grandtotal) {
-                $('#grandtotal').html(grandtotal);
-                $('#subtotal').html(grandtotal);
-                $.get('/cart-check', function(data) {
-                    if (data.count > 0) {
-                        console.log('none');
-                        // $('#cart').css('color', 'white');
-                        $('#cart').html(data.count);
-                        // $('#cart-items').empty();
-                        // for (var i=0; i<data.count; i++) {
-                        //     $('#cart-items').append('<li>'+data.items[i].product_name+' '+data.items[i].amount+'</li>');
-                        // }
-                        $('#contained').css('display', 'block');
-                        $('#emptycart').css('display', 'none');
-                    }
-                    else {
-                        // $('#cart').css('color', 'black');
-                        $('#cart').html('0');
-                        // $('#cart-items').empty();
-                        $('#contained').css('display', 'none');
-                        $('#emptycart').css('display', 'block');
-                    }
+                $.get('/cart/get-grand-total', function(grandtotal) {
+                    $('#grandtotal').html(grandtotal);
+                    $('#subtotal').html(grandtotal);
+                    $.get('/cart-check', function(data) {
+                        data = data;
+                        if (data.count > 0) {
+                            // $('#cart').css('color', 'white');
+                            $('#cart').html(data.count);
+                            // $('#cart-items').empty();
+                            // for (var i=0; i<data.count; i++) {
+                            //     $('#cart-items').append('<li>'+data.items[i].product_name+' '+data.items[i].amount+'</li>');
+                            // }
+                            $('#contained').css('display', 'block');
+                            $('#emptycart').css('display', 'none');
+                        }
+                        else {
+                            // $('#cart').css('color', 'black');
+                            $('#cart').html('0');
+                            // $('#cart-items').empty();
+                            $('#contained').css('display', 'none');
+                            $('#emptycart').css('display', 'block');
+                        }
+                    });
                 });
-            });
+                $('#namaproduk-dihapus').css('display','block');
+                $('#namaproduk-dihapus').html(data0.product.name);
+            }
         });
     }
     $(document).ready(function() {

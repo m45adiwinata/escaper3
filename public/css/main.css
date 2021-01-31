@@ -191,7 +191,7 @@ footer{
 }
 .newsletter input{
    border: 1.5px solid black;
-   width: 70%;
+   width: 50%;
    font-size: 0.5rem;
    padding: 0px 5px;
    margin-right: 10px;
@@ -721,12 +721,16 @@ footer{
 .checkout-info .form-group{
    margin: 15px 0px 0px 0px;
 }
+.checkout-info .form-group input[type=text]{
+   border: 1px solid #AAAAAA;
+   border-radius:5px;
+}
 .checkout-info label{
    font-size: 0.8rem;
    letter-spacing: 0.3px;
 }
 .checkout-info label span{
-   color: red;
+   color: black;
 }
 .checkout-info input,
 .checkout-info select{

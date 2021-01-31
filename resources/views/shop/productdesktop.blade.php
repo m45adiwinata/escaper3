@@ -23,7 +23,7 @@
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-          </div>
+          </div> 
           <div class="swiper-container gallery-thumbs">
             <div class="swiper-wrapper">
               @foreach($product->image as $image)

@@ -7,6 +7,7 @@ use App\Product;
 use App\Cart;
 use App\ProductSize;
 use App\TextBerjalan;
+use App\ProductType;
 
 class shopController extends Controller
 {
@@ -30,17 +31,26 @@ class shopController extends Controller
         if (isset($_COOKIE['guest_code']) && isset($_COOKIE['currency'])) {
             if (count($_GET) > 0) {
                 $data['products'] = Product::where('product_type_id', $_GET['type_id'])->get();
+                $data['typeselected'] = ProductType::find($_GET['type_id']);
             }
             else {
                 $data['products'] = Product::get();
+                $data['typeselected'] = null;
             }
-            $textberjalan = TextBerjalan::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->first();
-            if(!$textberjalan) {
+            $textberjalan = TextBerjalan::where('currency', $_COOKIE['currency'])->where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->get();
+            if(count($textberjalan) == 0) {
                 $data['textberjalan'] = 'text here';
             }
             else {
-                $data['textberjalan'] = $textberjalan->text;
+                $text = '';
+                foreach ($textberjalan as $key => $tb) {
+                    $text .= $tb->text;
+                    $text .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+                $data['textberjalan'] = $text;
             }
+            $data['producttypes'] = ProductType::get();
+
             return view('shop/shop', $data);
         }
         else {
@@ -53,13 +63,20 @@ class shopController extends Controller
         if (isset($_COOKIE['guest_code']) && isset($_COOKIE['currency'])) {
             $data['product'] = Product::find($_GET["productid"]);
             $data ['product']->stocks = $data['product']->availability()->first()->stocks;
-            $textberjalan = TextBerjalan::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->first();
-            if(!$textberjalan) {
+            $textberjalan = TextBerjalan::where('currency', $_COOKIE['currency'])->where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->orderBy('created_at')->get();
+            if(count($textberjalan) == 0) {
                 $data['textberjalan'] = 'text here';
             }
             else {
-                $data['textberjalan'] = $textberjalan->text;
+                $text = '';
+                foreach ($textberjalan as $key => $tb) {
+                    $text .= $tb->text;
+                    $text .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+                $data['textberjalan'] = $text;
             }
+            $data['producttypes'] = ProductType::get();
+
             return view('shop/product', $data);
         }
         else {

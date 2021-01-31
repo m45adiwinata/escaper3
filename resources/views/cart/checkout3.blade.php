@@ -172,7 +172,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="text-left"><b>Shipping{{$_COOKIE['currency'] == 'IDR' ? '' : ' (flate rate)'}}</b></td>
+                                <td class="text-left"><b>Shipping{{$_COOKIE['currency'] == 'IDR' ? '' : ' (flat rate)'}}</b></td>
                                 <td class="text-right">
                                     <b>
                                         @php 
@@ -181,7 +181,7 @@
                                             echo('FREE SHIPPING');
                                         }
                                         else if ($_COOKIE['currency'] == 'USD') {
-                                            $shipping = 15;
+                                            $shipping = 10;
                                             echo('$ '.number_format($shipping, 2, ',', '.'));
                                         }
                                         else {
@@ -482,10 +482,10 @@
             $('#submitbtn').css('display', 'block');
         });
         $('#showlogin').click(function() {
-            $('#login').css('display', 'block');
+            $('.login').css('display', 'block');
         });
         $('#showcoupon').click(function() {
-            $('#coupon').css('display', 'block');
+            $('.coupon').css('display', 'block');
         });
         $('#checkCreateAcc').change(function() {
             if(this.checked) {
@@ -493,11 +493,16 @@
                     $('#create-password').css('display', 'block');
                     $.get('/cart/check-discount/'+$('#inputEmail').val(), function(count) {
                         if(count == 0) {
+                            // $.ajax({
+                            //     type: "POST",
+                            //     url: '/cart/update-temp-cart',
+                            //     success
+                            // })
                             $.post('/cart/update-temp-cart', {
                                 '_token' : $('meta[name=csrf-token]').attr('content'),
                                 discount: 1
                             })
-                            .success(function() {
+                            .done(function() {
                                 subtotal = {!! $subtotal !!};
                                 grandtotal = {!! $grandtotal !!};
                                 discount = subtotal / 10;
