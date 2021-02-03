@@ -5,7 +5,7 @@
         </marquee>
         <div class="wrapper container-lg">
             <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
-            <div class="logo" id="header-logo"><a href="/home">Escaper<sup style="font-size:40%; vertical-align:top; top:17px;">&#174;</sup></a></div>
+            <div class="logo" id="header-logo"><a href="/home">Escaper<sup style="">&#174;</sup></a></div>
                 <input type="radio" name="slide" id="menu-btn">
                 <input type="radio" name="slide" id="cancel-btn">
                 <ul class="nav-links">
@@ -20,7 +20,17 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="/lookbook">Lookbook</a></li>
+                    <li>
+                        <a href="" class="desktop-drop">Lookbook</a>
+                        <input type="checkbox" id="showDrop1">
+                        <label for="showDrop1" class="mobile-drop"><a href="">Lookbook</a><i class="fas fa-sort-down"></i></label>
+                        <ul class="drop-menu1">
+                            <li><a href="/lookbook">Lookbook 2020</a></li>
+                            <li><a href="/lookbook">Lookbook 2021</a></li>
+                            <li><a href="/lookbook">Lookbook 2022</a></li>
+                            <li><a href="/lookbook">Lookbook 2023</a></li>
+                        </ul>
+                    </li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
                 </ul>

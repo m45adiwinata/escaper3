@@ -62,7 +62,7 @@
                 }
                 .header-logo sup{
                     font-size:35%; 
-                    top:15px;
+                    top:10px;
                 }
                 .currency-txt{
                     font-size:20px;

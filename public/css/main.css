@@ -57,6 +57,11 @@ nav .wrapper{
    font-weight: 900;
    letter-spacing: 2px;
 }
+.wrapper .logo a sup{
+   font-size:40%; 
+   vertical-align:top; 
+   top: 17px;
+}
 .wrapper .nav-cart{
    position: relative;
 }
@@ -94,20 +99,23 @@ nav .wrapper{
    line-height: 17vh;
    transition: all .2s ease;
 }
-.nav-links .drop-menu{
+.nav-links .drop-menu,
+.nav-links .drop-menu1{
    background: rgba(0, 0, 0, 0.5);
    position: absolute;
    top : 21vh;
    visibility: hidden;
 }
-.nav-links .drop-menu a{
+.nav-links .drop-menu a,
+.nav-links .drop-menu1 a{
    color: white;
    font-size: 0.9rem;
    font-weight: 700;
    padding: 25px;
    line-height: 50px;
 }
-.nav-links li:hover .drop-menu{
+.nav-links li:hover .drop-menu,
+.nav-links li:hover .drop-menu1{
    top: 20vh;
    opacity: 1;
    visibility: visible;
@@ -116,7 +124,8 @@ nav .wrapper{
 .nav-links li:hover > a{
    color: black;
 }
-.nav-links .drop-menu li:hover{
+.nav-links .drop-menu li:hover,
+.nav-links .drop-menu1 li:hover{
    background: rgba(238, 238, 238);
 }
 .wrapper .nav-links li:hover > a{
@@ -129,10 +138,12 @@ nav .wrapper{
    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
    border: none;
 }
-.scroll .wrapper .nav-links .drop-menu a{
+.scroll .wrapper .nav-links .drop-menu a,
+.scroll .wrapper .nav-links .drop-menu1 a{
    color: white;
 }
-.scroll .wrapper .nav-links .drop-menu li:hover > a{
+.scroll .wrapper .nav-links .drop-menu li:hover > a,
+.scroll .wrapper .nav-links .drop-menu1 li:hover > a{
    color: black;
 }
 .scroll .wrapper .logo a, 
@@ -247,11 +258,13 @@ footer{
    display: flex;
    justify-content: flex-start;
 }
-.shop-top p{
+.shop-top a{
+   color: black;
    font-size: 1.1rem;
    font-weight: 800;
-   padding: 20px 0px;
+   padding: 0px 0px;
    text-transform: uppercase;
+   text-decoration: none;
 }
 .shop-wrapper .item{
    padding: 10px;
@@ -508,12 +521,12 @@ footer{
 /*cart*/
 .cart-wrapper{
    position: relative;
-   top: 25vh;
+   top: 20vh;
    min-height: 80vh;
-   margin-bottom: 25vh;
+   margin-bottom: 20vh;
 }
 .cart-top{
-   padding: 30px 0px;
+   padding-bottom: 15px;
    display: flex;
    justify-content: center;
 }
@@ -802,6 +815,32 @@ footer{
 .place-order .btn:hover{
    background: rgba(0, 0, 0, 0.8);
 }
+
+/*lookbook*/
+.lookbook-wrapper{
+   position: relative;
+   top: 20vh;
+   margin-bottom: 20vh;
+}
+.lookbook-wrapper .container-lg{
+   height: 110vh;
+}
+.lookbook-wrapper .swiper-container{
+   height: 90%;
+}
+.lookbook-wrapper .swiper-slide{
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: contain;
+}
+.lookbook-name{
+   font-size: 0.9rem;
+   font-weight: 600;
+   display: flex;
+   justify-content: center;
+   padding: 15px 0px 5px 0px;
+
+}
 /*about*/
 .about-wrapper{
    background-image: url(img/back2.jpg);
@@ -1054,7 +1093,8 @@ footer{
    .nav-links li:hover > a{
       color: white;
    }
-   .nav-links .drop-menu li:hover{
+   .nav-links .drop-menu li:hover,
+   .nav-links .drop-menu1 li:hover{
       background: black;
    }
    #menu-btn:checked ~ .nav-links{
@@ -1066,7 +1106,8 @@ footer{
    .nav-links::-webkit-scrollbar{
       width: 0px;
    }
-   .nav-links .drop-menu{
+   .nav-links .drop-menu,
+   .nav-links .drop-menu1{
       background-color: rgba(255, 255, 255, 0.1);
       position: static;
       opacity: 1;
@@ -1076,7 +1117,8 @@ footer{
       max-height: 0;
       overflow: hidden;
    }
-   .nav-links .drop-menu li a{
+   .nav-links .drop-menu li a,
+   .nav-links .drop-menu1 li a{
       font-size: 0.9rem;
       font-weight: 600;
    }
@@ -1089,6 +1131,10 @@ footer{
    #showDrop:checked ~ .drop-menu{
       max-height: 100%;
    }
+   #showDrop1:checked ~ .drop-menu1{
+      max-height: 100%;
+   }p
+   
 
    /*scroll*/
    .scroll .wrapper .nav-links a{
@@ -1107,10 +1153,16 @@ footer{
       flex-direction: column-reverse;
    }
    .newsletter{
-      flex: 0.7;
-      justify-content: center;
+      justify-content: space-between;
       width: 100%;
       margin-bottom: 10px;
+   }
+   .newsletter input{
+      width: 75%;
+      margin-right: 5px;
+   }
+   .newsletter button{
+      width: 25%;
    }
    .copyright{
       display: flex;
@@ -1217,11 +1269,19 @@ footer{
       column-width: 200px;
       text-align: center;
    }
+
 }
 @media screen and (max-width: 450px){
    /*nav*/
+   .wrapper .logo a sup{
+      top: 11px;
+   }
    .wrapper .menu-btn{
       font-size: 1.9rem;
+   }
+   .nav-cart{
+      position: relative;
+      top: -3px;
    }
    .wrapper .nav-cart img{
       height: 35px;
@@ -1233,6 +1293,21 @@ footer{
       top: 33%;
       right: 35%;
    }
+
+   /*lookbook*/
+   .lookbook-wrapper .container-lg{
+      height: 60vh;
+   }
+   .lookbook-wrapper .swiper-container{
+      height: 70%;
+   }
+   .lookbook-wrapper .swiper-slide{
+      background-size: cover;
+   }
+   .lookbook-name{
+      padding: 40px 0px;
+   }
+
    /*about*/
    .about-content{
       width: 90vw;
